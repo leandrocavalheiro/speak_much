@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <PropertyGroup>
+        <VersionSuffix>1.0.0</VersionSuffix>
+        <AssemblyVersion>$(VersionSuffix)</AssemblyVersion>
+        <Version>$(VersionSuffix)</Version>
+        <Company>WeNerds</Company>
+        <Authors>Leandro Luiz G. Cavalheiro</Authors>
+        <Copyright>Copyright ©WeNerds</Copyright>
+        <Product>Speak Much</Product>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Description>[WIP] A lib for translaction</Description>
+        <RepositoryUrl>https://github.com/leandrocavalheiro/speak_much</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\SpeakMuch\README.md" Pack="true" PackagePath="$(PackageReadmeFile)" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.1" />
+    </ItemGroup>
+
+</Project>
