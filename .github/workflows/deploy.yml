@@ -1,0 +1,50 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    types:
+      - closed
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up the .NET SDK
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'  # Specify your project's .NET version
+
+      # Step 3: Restore NuGet packages
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      # Step 4: Read the version from package-version.yml
+      - name: Read version from package_version.yml
+        id: version
+        run: |
+          VERSION=$(yq eval '.PACKAGE_VERSION' package-version.yml)  # Reads version from package_version.yml
+          echo "PACKAGE_VERSION=${VERSION}" >> $GITHUB_ENV  # Sets version as an environment variable for later steps
+      
+      # Step 5: Publish the project, specifying the output directory
+      - name: Publish the project
+        run: |
+          dotnet publish --configuration Release --output ./publish_output --version-suffix ${{ env.PACKAGE_VERSION }}
+      
+      # Step 6: Pack the project, using the version from package_version.yml
+      - name: Pack the project
+        run: |
+          dotnet pack --configuration Release --output ./nuget_output --version-suffix ${{ env.PACKAGE_VERSION }}
+      
+      # Step 7: Publish the NuGet package, using --skip-duplicate to avoid duplicates
+      - name: Publish NuGet package
+        run: |
+          dotnet nuget push ./nuget_output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
