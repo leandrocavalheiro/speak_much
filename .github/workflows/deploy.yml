@@ -27,11 +27,11 @@ jobs:
       - name: Restore NuGet packages
         run: dotnet restore
 
-      # Step 4: Read the version from package_version.yml
+      # Step 4: Read the version from package-version.yml
       - name: Read version from package_version.yml
         id: version
         run: |
-          VERSION=$(yq eval '.PACKAGE_VERSION' package_version.yml)  # Reads version from package_version.yml
+          VERSION=$(yq eval '.PACKAGE_VERSION' package-version.yml)  # Reads version from package_version.yml
           echo "PACKAGE_VERSION=${VERSION}" >> $GITHUB_ENV  # Sets version as an environment variable for later steps
       
       # Step 5: Publish the project, specifying the output directory
