@@ -32,7 +32,7 @@ jobs:
         id: version
         run: |
           PACKAGE_VERSION=$(yq eval '.PACKAGE_VERSION' package-version.yml)
-          SUFFIX_VERSION=$(yq eval '.SUFFIX_VERSION // empty' package-version.yml)
+          SUFFIX_VERSION=$(yq eval '.SUFFIX_VERSION // ""' package-version.yml)
 
           if [ -z "$PACKAGE_VERSION" ]; then
             echo "Error: PACKAGE_VERSION is not set in package-version.yml"
