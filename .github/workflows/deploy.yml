@@ -25,12 +25,17 @@ jobs:
       - name: Restore NuGet packages
         run: dotnet restore
 
-      # Step 4: Build and pack the project
-      - name: Build and pack NuGet package
-        run: dotnet pack --configuration Release -o ./output
-
-      # Step 5: Publish the package to NuGet (only if the PR is closed and merged)
-      - name: Publish NuGet package
-        if: github.event.pull_request.merged == true
+      # Passo 4: Publicar o projeto, especificando o diretório de saída
+      - name: Publish the project
         run: |
-          dotnet nuget push ./output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+          dotnet publish --configuration Release --output ./publish_output
+      
+      # Passo 5: Empacotar o NuGet, se necessário
+      - name: Pack the project
+        run: |
+          dotnet pack --configuration Release --output ./nuget_output
+      
+      # Passo 6: Publicar o pacote no NuGet (substitua pelos detalhes da sua conta)
+      - name: Publish NuGet package
+        run: |
+          dotnet nuget push ./nuget_output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
