@@ -51,10 +51,9 @@ jobs:
       # Step 5: Build and Pack the project
       - name: Publish the project
         run: |
-          dotnet build --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }}          
-          ls -l ./nuget_output
+          dotnet pack --configuration Release --version ${{ env.PACKAGE_VERSION }}  --verbosity detailed          
 
       # Step 7: Push the package to NuGet, using --skip-duplicate
       - name: Publish NuGet package
         run: |
-          dotnet nuget push ./nuget_output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push /home/runner/work/speak_much/speak_much/SpeakMuch/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
