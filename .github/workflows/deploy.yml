@@ -52,8 +52,12 @@ jobs:
       - name: Publish the project
         run: |
           dotnet publish --configuration Release --output ./publish_output --version ${{ env.PACKAGE_VERSION }}
+      
+      # Step 6: Create output Folder
+      - name: Criar pasta de saída
+        run: mkdir -p /home/runner/work/speak_much/speak_much/nuget_output
 
-      # Step 6: Pack the project
+      # Step 7: Pack the project
       - name: Pack the project
         run: |
           dotnet pack --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }}
