@@ -51,8 +51,7 @@ jobs:
       # Step 5: Build and Pack the project
       - name: Publish the project
         run: |
-          dotnet build --configuration Release
-          dotnet pack --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }}  --verbosity detailed
+          dotnet build --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }}          
           ls -l ./nuget_output
 
       # Step 7: Push the package to NuGet, using --skip-duplicate
