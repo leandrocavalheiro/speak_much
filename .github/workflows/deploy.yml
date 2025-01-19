@@ -48,19 +48,11 @@ jobs:
             echo "PACKAGE_VERSION=${PACKAGE_VERSION}" >> $GITHUB_ENV
           fi
 
-      # Step 5: Publish the project
+      # Step 5: Build and Pack the project
       - name: Publish the project
         run: |
-          dotnet publish --configuration Release --output ./publish_output --version ${{ env.PACKAGE_VERSION }}
-      
-      # Step 6: Create output Folder
-      - name: Criar pasta de saída
-        run: mkdir -p ./nuget_output
-
-      # Step 7: Pack the project
-      - name: Pack the project
-        run: |
-          dotnet pack --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }} --verbosity detailed
+          dotnet build --configuration Release
+          dotnet pack --configuration Release --output ./nuget_output --version ${{ env.PACKAGE_VERSION }}  --verbosity detailed
           ls -l ./nuget_output
 
       # Step 7: Push the package to NuGet, using --skip-duplicate
