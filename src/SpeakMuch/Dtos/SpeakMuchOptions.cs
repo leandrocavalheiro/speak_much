@@ -2,11 +2,11 @@ namespace SpeakMuch.Dtos;
 
 public class SpeakMuchOptions
 {
-    public string ResourcesPath { get; set; }
-    public string ResourceName { get; set; }
-    public string Languages { get; set; }
-    public string Language { get; set; }
-    public string Context { get; set; }
+    public string ResourcesPath { get; set; } = string.Empty;
+    public string ResourceName { get; set; } = string.Empty;
+    public string Languages { get; set; } = string.Empty;
+    public string Language { get; set; } = string.Empty;
+    public string Context { get; set; } = string.Empty;
     public bool UseMultiplesFiles { get; set; }
     
     public SpeakMuchOptions(){}
@@ -15,7 +15,7 @@ public class SpeakMuchOptions
         string resourceName,
         string languages,
         string language,
-        string context = null,
+        string context = "",
         bool useMultiplesFiles = false)
     {
         ResourcesPath = resourcesPath;

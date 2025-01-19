@@ -1,0 +1,12 @@
+{
+  "user": {
+    "Greeting": "Olá Usuário",
+    "Farewell": "Até logo Usuário"
+  },
+  "customer": {
+    "Greeting": "Olá Cliente",
+    "Farewell": "Até logo Cliente"
+  },
+  "Greeting": "Olá",
+  "Farewell": "Até logo"
+}

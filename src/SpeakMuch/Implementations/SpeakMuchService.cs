@@ -1,9 +1,3 @@
-using System.Text.Json;
-using Microsoft.Extensions.Options;
-using SpeakMuch.Dtos;
-using SpeakMuch.Extensions;
-using SpeakMuch.Interfaces;
-
 namespace SpeakMuch.Implementations;
 
 public class SpeakMuchService : ISpeakMuchService

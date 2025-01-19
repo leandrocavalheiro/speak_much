@@ -1,15 +1,13 @@
-using Microsoft.Extensions.Configuration;
-
 namespace SpeakMuch.Extensions;
 
-public static class ConfigurationsExtensions
+public static class StringExtensions
 {
-    public static TResult GetValue<TResult>(this IConfiguration value, string name, TResult defaultValue = default)
+    public static TResult GetFromEnvironmentVariable<TResult>(this string value, TResult defaultValue = default)
     {
-        var result = value[name];
+        var result = Environment.GetEnvironmentVariable(value);
         if (string.IsNullOrWhiteSpace(result))
             return defaultValue;
-
+        
         var targetType = typeof(TResult);
         
         if (targetType == typeof(bool))
@@ -28,5 +26,16 @@ public static class ConfigurationsExtensions
             return (TResult)(object)result;
         
         return (TResult)Convert.ChangeType(result, targetType);
-    }      
+    }
+    public static TResponse Deserialize<TResponse>(this string value)
+    {
+        try
+        {
+            return JsonSerializer.Deserialize<TResponse>(value, JsonConfigFormatted);
+        }
+        catch (Exception)
+        {
+            return default;
+        }       
+    }
 }

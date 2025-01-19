@@ -1,13 +1,4 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using SpeakMuch.Dtos;
-using SpeakMuch.Extensions;
-using SpeakMuch.Implementations;
-using SpeakMuch.Interfaces;
-
 namespace SpeakMuch.Configurations;
-using static SpeakMuch.Constants.SpeakMuchConstants;
-
 public static class SpeakMuchConfigurations
 {
     public static IServiceCollection AddSpeakMuch(
