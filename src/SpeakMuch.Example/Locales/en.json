@@ -1,0 +1,12 @@
+{
+  "user": {
+    "Greeting": "Hello User",
+    "Farewell": "Goodbye User"
+  },
+  "customer": {
+    "Greeting": "Hello Customer",
+    "Farewell": "Goodbye Customer"
+  },
+  "Greeting": "Hello",
+  "Farewell": "Goodbye"
+}
