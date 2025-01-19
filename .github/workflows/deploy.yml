@@ -1,0 +1,36 @@
+name: CI/CD - Build and Publish NuGet Package
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up .NET SDK (ensure that you're using the correct version)
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      # Step 3: Restore the NuGet packages
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      # Step 4: Build and pack the project
+      - name: Build and pack NuGet package
+        run: dotnet pack --configuration Release -o ./output
+
+      # Step 5: Publish the package to NuGet (only if the PR is closed and merged)
+      - name: Publish NuGet package
+        if: github.event.pull_request.merged == true
+        run: |
+          dotnet nuget push ./output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

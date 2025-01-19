@@ -6,9 +6,11 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     <PropertyGroup>
-        <VersionSuffix>1.0.0</VersionSuffix>
-        <AssemblyVersion>$(VersionSuffix)</AssemblyVersion>
-        <Version>$(VersionSuffix)</Version>
+        <IsPackable>true</IsPackable>
+        <VersionPrefix>$(PACKAGE_VERSION)</VersionPrefix>
+        <VersionSuffix>$(VERSION_SUFFIX)</VersionSuffix>
+        <Version>$(PACKAGE_VERSION)</Version>
+        <AssemblyVersion>$(PACKAGE_VERSION)</AssemblyVersion>
         <Company>WeNerds</Company>
         <Authors>Leandro Luiz G. Cavalheiro</Authors>
         <Copyright>Copyright ©WeNerds</Copyright>
