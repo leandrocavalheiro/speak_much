@@ -30,9 +30,9 @@ jobs:
       # Step 4: Read the version from package-version.yml
       - name: Read version from package-version.yml
         id: version
-        run: |
-          PACKAGE_VERSION=$(yq eval '.PACKAGE_VERSION' package-version.yml)
-          SUFFIX_VERSION=$(yq eval '.SUFFIX_VERSION // ""' package-version.yml)
+        run: |          
+          PACKAGE_VERSION=$(yq e '.variables.PACKAGE_VERSION' package-version.yml)
+          SUFFIX_VERSION=$(yq e '.variables.SUFFIX_VERSION // ""' package-version.yml)          
 
           if [ -z "$PACKAGE_VERSION" ]; then
             echo "Error: PACKAGE_VERSION is not set in package-version.yml"
