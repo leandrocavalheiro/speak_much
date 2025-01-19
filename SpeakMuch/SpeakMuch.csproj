@@ -9,8 +9,8 @@
         <IsPackable>true</IsPackable>
         <VersionSuffix>$(VERSION_SUFFIX)</VersionSuffix>
         <VersionPrefix>$(VERSION_PREFIX)</VersionPrefix>
-        <Version>$(VERSION_PREFIX)$(VERSION_SUFFIX)</Version>
-        <AssemblyVersion>$(VERSION_PREFIX)</AssemblyVersion>
+        <Version>$(PACKAGE_VERSION)</Version>
+        <AssemblyVersion>$(PACKAGE_VERSION)</AssemblyVersion>
         <Company>WeNerds</Company>
         <Authors>Leandro Luiz G. Cavalheiro</Authors>
         <Copyright>Copyright ©WeNerds</Copyright>
